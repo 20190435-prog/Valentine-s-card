@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Valentine's Card</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #ff4d6d, #ffb6c1);
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+      color: #fff;
+      text-align: center;
+    }
+
+    .card {
+      position: relative;
+      max-width: 700px;
+      margin: 50px auto;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(10px);
+      z-index: 10;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px #fff, 0 0 20px #ff4d6d;
+    }
+
+    p {
+      font-size: 1.2em;
+      line-height: 1.6;
+      margin: 15px 0;
+    }
+
+    .hearts {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      transform: rotate(45deg);
+      animation: float 8s infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: 10px;
+      top: 0;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0) rotate(45deg); opacity: 1; }
+      100% { transform: translateY(-800px) rotate(45deg); opacity: 0; }
+    }
+
+    .sparkle {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background: #fff;
+      border-radius: 50%;
+      animation: twinkle 2s infinite;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0; }
+      50% { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="hearts"></div>
+  <div class="card">
+    <h1>Happy Valentine’s Day, my love 🤍</h1>
+    <p>I know I can be a lot sometimes. Okay… often. But thank you for being so patient with me, for staying, for choosing me even when my brain goes into overdrive or my moods do their little rollercoaster thing.</p>
+    <p>I really hope you know how much you mean to me. Not just in the cute, flirty, heart-eyes way (though yes, very much that too), but in the deeper, quieter way. The way you make me feel safe, wanted. The way you make my days softer just by being in them.</p>
+    <p>I love how you talk to me, how you make me laugh, how you can be sweet and unintentionally funny at the same time. I love the connection we’re building, the comfort, the trust, all of it.</p>
+    <p>No matter what mood I’m in, no matter how dramatic I may get, I care about you so much. More than I probably say properly.</p>
+    <p>I’m really, really glad it’s you.</p>
+    <p>Happy Valentine’s Day 🤍<br>Love you always.</p>
+  </div>
+  <script>
+    // Generate floating hearts
+    const heartsContainer = document.querySelector('.hearts');
+    for (let i = 0; i < 30; i++) {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.left = Math.random() * 100 + '%';
+      heart.style.top = '100%';
+      heart.style.animationDuration = (5 + Math.random() * 5) + 's';
+      heartsContainer.appendChild(heart);
+    }
+
+    // Generate sparkles
+    for (let i = 0; i < 50; i++) {
+      const sparkle = document.createElement('div');
+      sparkle.className = 'sparkle';
+      sparkle.style.left = Math.random() * window.innerWidth + 'px';
+      sparkle.style.top = Math.random() * window.innerHeight + 'px';
+      sparkle.style.animationDuration = (1 + Math.random() * 2) + 's';
+      document.body.appendChild(sparkle);
+    }
+
+    // Confetti burst on click
+    document.querySelector('.card').addEventListener('click', () => {
+      for (let i = 0; i < 100; i++) {
+        const confetti = document.createElement('div');
+        confetti.style.position = 'absolute';
+        confetti.style.width = '8px';
+        confetti.style.height = '8px';
+        confetti.style.background = `hsl(${Math.random()*360}, 100%, 70%)`;
+        confetti.style.left = window.innerWidth/2 + 'px';
+        confetti.style.top = window.innerHeight/2 + 'px';
+        confetti.style.borderRadius = '50%';
+        confetti.style.animation = `confetti-fall ${2+Math.random()*3}s forwards`;
+        document.body.appendChild(confetti);
+
+        confetti.animate([
+          { transform: `translate(${Math.random()*400-200}px, ${Math.random()*400-200}px)` }
+        ], { duration: 2000+Math.random()*2000, fill: 'forwards' });
+      }
+    });
+  </script>
+</body>
+</html>
